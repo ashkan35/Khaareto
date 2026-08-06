@@ -1,0 +1,309 @@
+@page "/"
+@inject ISnackbar Snackbar
+
+<PageTitle>خارتو | فروشگاه تخصصی انواع خار صنعتی</PageTitle>
+
+@* ─────────────────────────── Announcement strip ─────────────────────────── *@
+<div class="kh-announce">
+    <span class="kh-announce-dot kh-pulse"></span>
+    <span>این فروشگاه در دست راه‌اندازی است — به‌زودی سفارش‌گیری آنلاین آغاز می‌شود</span>
+    <span class="kh-announce-sweep kh-scan" aria-hidden="true"></span>
+</div>
+
+@* ───────────────────────────────  Header  ──────────────────────────────── *@
+<MudAppBar Fixed="false" Elevation="0" Class="kh-appbar">
+    <MudLink Href="#top" Color="Color.Inherit" Underline="Underline.None" Class="kh-brand">
+        <svg width="46" height="46" viewBox="0 0 64 64" fill="none" role="img" aria-label="لوگو خارتو">
+            <circle cx="32" cy="32" r="30" stroke="#232b34" stroke-width="2" />
+            <path d="M32 10a22 22 0 1 1-13.5 39.4" stroke="#f0b323" stroke-width="7" stroke-linecap="round" />
+            <circle cx="18.5" cy="49.4" r="5.6" fill="#0d1014" stroke="#f0b323" stroke-width="3.4" />
+            <circle cx="44" cy="13.6" r="5.6" fill="#0d1014" stroke="#f0b323" stroke-width="3.4" />
+            <path d="M32 10a22 22 0 0 1 12 3.6" stroke="#f0b323" stroke-width="7" stroke-linecap="round" />
+        </svg>
+        <span class="kh-brand-text">
+            <span class="kh-brand-name">خــارتو</span>
+            <span class="kh-brand-domain">KHAARETO.IR</span>
+        </span>
+    </MudLink>
+
+    <MudSpacer />
+
+    <nav class="kh-nav">
+        <MudLink Href="#products" Color="Color.Inherit" Underline="Underline.None" Class="kh-nav-link">دسته‌بندی خارها</MudLink>
+        <MudLink Href="#specs" Color="Color.Inherit" Underline="Underline.None" Class="kh-nav-link">استانداردها</MudLink>
+        <MudLink Href="#notify" Color="Color.Inherit" Underline="Underline.None" Class="kh-nav-link">تماس با ما</MudLink>
+    </nav>
+
+    <MudSpacer />
+
+    <div class="kh-header-contact">
+        <span class="kh-phone">۰۲۱ — ۰۰۰ ۰۰ ۰۰۰</span>
+        <MudButton Href="#notify" Variant="Variant.Filled" Color="Color.Primary" DropShadow="false" Class="kh-btn-accent">
+            استعلام قیمت
+        </MudButton>
+    </div>
+</MudAppBar>
+
+@* ────────────────────────────────  Hero  ───────────────────────────────── *@
+<section id="top" class="kh-hero">
+    <div class="kh-grid-overlay kh-grid-overlay--masked" aria-hidden="true"></div>
+
+    <MudContainer MaxWidth="MaxWidth.False" Class="kh-container kh-hero-inner">
+        <MudGrid Spacing="8" Class="align-center">
+
+            <MudItem xs="12" md="6">
+                <div class="kh-eyebrow">
+                    <span class="kh-eyebrow-dot"></span>
+                    تأمین‌کننده تخصصی قطعات اتصال و نگهدارنده
+                </div>
+
+                <MudText Typo="Typo.h1" Class="kh-hero-title">
+                    هر <span class="kh-accent">خاری</span> که<br />ماشین‌آلاتت لازم دارد
+                </MudText>
+
+                <MudText Typo="Typo.body1" Class="kh-hero-lead">
+                    خار فنری، خار هلالی، خار موازی، رول‌پین، دوول‌پین و پین چنگالی — در سایزها و
+                    آلیاژهای مختلف، مطابق استانداردهای DIN و ISO. از تک‌عدد تا سفارش صنعتی.
+                </MudText>
+
+                <MudStack Row Spacing="3" Wrap="Wrap.Wrap" Class="kh-hero-actions">
+                    <MudButton Href="#products" Variant="Variant.Filled" Color="Color.Primary"
+                               Size="Size.Large" DropShadow="false" Class="kh-btn-accent kh-btn-lg">
+                        مشاهده انواع خار
+                    </MudButton>
+                    <MudButton Href="#notify" Variant="Variant.Outlined" Size="Size.Large"
+                               Class="kh-btn-ghost kh-btn-lg">
+                        دریافت کاتالوگ
+                    </MudButton>
+                </MudStack>
+
+                <div class="kh-stats">
+                    @foreach (var stat in Stats)
+                    {
+                        <div>
+                            <div class="kh-stat-value">@stat.Value</div>
+                            <div class="kh-stat-label">@stat.Label</div>
+                        </div>
+                    }
+                </div>
+            </MudItem>
+
+            <MudItem xs="12" md="6">
+                <MudPaper Elevation="0" Class="kh-hero-media">
+                    <ImageSlot Src="products/kh-hero.png"
+                               Alt="نمونه‌هایی از انواع خار و پین صنعتی خارتو"
+                               Placeholder="تصویر اصلی محصولات"
+                               Eager="true" />
+                    <div class="kh-hero-media-caption">فولاد فنری • استیل ۳۰۴ • آبکاری زرد</div>
+                </MudPaper>
+            </MudItem>
+
+        </MudGrid>
+    </MudContainer>
+</section>
+
+@* ──────────────────────────────  Products  ─────────────────────────────── *@
+<section id="products" class="kh-section">
+    <MudContainer MaxWidth="MaxWidth.False" Class="kh-container">
+
+        <div class="kh-section-head">
+            <div>
+                <div class="kh-kicker">دسته‌بندی محصولات</div>
+                <MudText Typo="Typo.h2">انواع خار موجود در خارتو</MudText>
+            </div>
+            <MudText Typo="Typo.body2" Class="kh-section-note">
+                تصاویر و جدول سایزبندی هر خانواده در حال تکمیل است. برای استعلام موجودی و قیمت
+                فعلاً از فرم تماس استفاده کنید.
+            </MudText>
+        </div>
+
+        <MudGrid Spacing="5">
+            @foreach (var product in ProductCatalog.Categories)
+            {
+                <MudItem xs="12" sm="6" md="4" lg="3">
+                    <MudCard Elevation="0" Class="kh-card kh-product-card">
+                        <div class="kh-product-media">
+                            <ImageSlot Src="@product.ImagePath" Alt="@product.Name" />
+                        </div>
+                        <MudCardContent Class="kh-product-body">
+                            <MudText Typo="Typo.h6">@product.Name</MudText>
+                            <div class="kh-product-en">@product.EnglishName</div>
+                            <MudText Typo="Typo.body2" Class="kh-product-desc">@product.Description</MudText>
+                            <div class="kh-product-foot">
+                                <span class="kh-product-std">@product.Standard</span>
+                                <span class="kh-badge-soon">به‌زودی</span>
+                            </div>
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
+            }
+        </MudGrid>
+    </MudContainer>
+</section>
+
+@* ───────────────────────────────  Specs  ───────────────────────────────── *@
+<section id="specs" class="kh-section kh-section--tight">
+    <MudContainer MaxWidth="MaxWidth.False" Class="kh-container">
+        <MudGrid Spacing="5">
+            @foreach (var spec in Specs)
+            {
+                <MudItem xs="12" md="4">
+                    <MudPaper Elevation="0" Class="kh-card kh-spec-card">
+                        <MudIcon Icon="@spec.Icon" Class="kh-spec-icon" />
+                        <MudText Typo="Typo.h5" Class="kh-spec-title">@spec.Title</MudText>
+                        <MudText Typo="Typo.body2" Class="kh-muted">@spec.Body</MudText>
+                    </MudPaper>
+                </MudItem>
+            }
+        </MudGrid>
+    </MudContainer>
+</section>
+
+@* ───────────────────────────  Notify / contact  ────────────────────────── *@
+<section id="notify" class="kh-section kh-section--tight">
+    <MudContainer MaxWidth="MaxWidth.False" Class="kh-container">
+        <MudPaper Elevation="0" Class="kh-cta">
+            <div class="kh-grid-overlay kh-grid-overlay--fine" aria-hidden="true"></div>
+
+            <div class="kh-cta-inner">
+                <div class="kh-cta-badge">
+                    <span class="kh-cta-badge-dot kh-pulse"></span>
+                    سایت در دست راه‌اندازی
+                </div>
+
+                <MudText Typo="Typo.h2" Class="kh-cta-title">به‌زودی، کامل‌تر از همیشه</MudText>
+
+                <MudText Typo="Typo.body1" Class="kh-cta-lead">
+                    فروشگاه آنلاین خارتو در حال آماده‌سازی است. شماره‌ات را بگذار تا لحظه افتتاح و
+                    لیست قیمت اولین دوره را برایت بفرستیم.
+                </MudText>
+
+                <MudStack Row Spacing="2" Justify="Justify.Center" Wrap="Wrap.Wrap" Class="kh-cta-form">
+                    <MudTextField T="string"
+                                  @bind-Value="_phone"
+                                  @bind-Value:after="ClearError"
+                                  InputType="InputType.Telephone"
+                                  Placeholder="۰۹۱۲ ۰۰۰ ۰۰۰۰"
+                                  Variant="Variant.Outlined"
+                                  Immediate="true"
+                                  Disabled="_notified"
+                                  Error="@(_error is not null)"
+                                  ErrorText="@_error"
+                                  OnKeyDown="OnKeyDown"
+                                  Class="kh-cta-input"
+                                  UserAttributes="@(new() { ["aria-label"] = "شماره تماس" })" />
+
+                    <MudButton OnClick="Notify"
+                               Variant="Variant.Filled"
+                               Color="Color.Primary"
+                               Size="Size.Large"
+                               Disabled="_notified"
+                               DropShadow="false"
+                               Class="kh-btn-accent kh-btn-lg">
+                        @(_notified ? "ثبت شد ✓" : "خبرم کن")
+                    </MudButton>
+                </MudStack>
+            </div>
+        </MudPaper>
+    </MudContainer>
+</section>
+
+@* ───────────────────────────────  Footer  ──────────────────────────────── *@
+<footer class="kh-footer">
+    <MudContainer MaxWidth="MaxWidth.False" Class="kh-container kh-footer-inner">
+        <div class="kh-footer-brand">
+            <svg width="30" height="30" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                <path d="M32 10a22 22 0 1 1-13.5 39.4" stroke="#6d7887" stroke-width="7" stroke-linecap="round" />
+                <circle cx="18.5" cy="49.4" r="5.6" fill="#0b0e11" stroke="#6d7887" stroke-width="3.4" />
+                <circle cx="44" cy="13.6" r="5.6" fill="#0b0e11" stroke="#6d7887" stroke-width="3.4" />
+                <path d="M32 10a22 22 0 0 1 12 3.6" stroke="#6d7887" stroke-width="7" stroke-linecap="round" />
+            </svg>
+            <span>خارتو — فروشگاه تخصصی انواع خار صنعتی</span>
+        </div>
+        <div class="kh-footer-meta">
+            <span dir="ltr">khaareto.ir</span>
+            <span>تهران، بازار آهن</span>
+            <span>© ۱۴۰۵</span>
+        </div>
+    </MudContainer>
+</footer>
+
+@code {
+    private string? _phone;
+    private string? _error;
+    private bool _notified;
+
+    private static readonly (string Value, string Label)[] Stats =
+    [
+        ("۹ نوع", "خانواده محصول"),
+        ("DIN / ISO", "استاندارد ابعادی"),
+        ("۱ تا ∞", "حداقل سفارش"),
+    ];
+
+    private static readonly (string Icon, string Title, string Body)[] Specs =
+    [
+        (Icons.Material.Outlined.Verified,
+            "مطابق استاندارد",
+            "تمام سایزها بر پایه DIN 471/472، DIN 6885، DIN 6888 و ISO 8752 تأمین می‌شود."),
+        (Icons.Material.Outlined.Layers,
+            "جنس و پوشش متنوع",
+            "فولاد فنری، استیل ضدزنگ ۳۰۴ و ۳۱۶، آبکاری زرد و سیاه‌کاری — متناسب با محیط کاری قطعه."),
+        (Icons.Material.Outlined.PrecisionManufacturing,
+            "سفارش ساخت",
+            "سایز خاص در انبار نیست؟ خار موازی و هلالی را طبق نقشه شما تراش‌کاری می‌کنیم."),
+    ];
+
+    private void ClearError() => _error = null;
+
+    private void OnKeyDown(KeyboardEventArgs args)
+    {
+        if (args.Key is "Enter" or "NumpadEnter")
+        {
+            Notify();
+        }
+    }
+
+    private void Notify()
+    {
+        if (_notified)
+        {
+            return;
+        }
+
+        if (!IsValidMobile(_phone))
+        {
+            _error = "لطفاً شماره موبایل را کامل و درست وارد کنید.";
+            return;
+        }
+
+        _error = null;
+        _notified = true;
+        Snackbar.Add("ثبت شد — به‌محض افتتاح فروشگاه خبرت می‌کنیم.", Severity.Success);
+    }
+
+    /// <summary>
+    /// Accepts Iranian mobile numbers written with Latin, Persian or Arabic-Indic digits,
+    /// with or without separators.
+    /// </summary>
+    private static bool IsValidMobile(string? input)
+    {
+        if (string.IsNullOrWhiteSpace(input))
+        {
+            return false;
+        }
+
+        var digits = new string(input
+            .Select(NormalizeDigit)
+            .Where(char.IsAsciiDigit)
+            .ToArray());
+
+        return digits.Length == 11 && digits.StartsWith("09", StringComparison.Ordinal);
+    }
+
+    private static char NormalizeDigit(char c) => c switch
+    {
+        >= '۰' and <= '۹' => (char)(c - '۰' + '0'), // Persian (Extended Arabic-Indic)
+        >= '٠' and <= '٩' => (char)(c - '٠' + '0'), // Arabic-Indic
+        _ => c,
+    };
+}

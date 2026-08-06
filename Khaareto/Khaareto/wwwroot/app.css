@@ -1,0 +1,127 @@
+/* ============================================================
+   Khaareto — global design tokens & base styles
+   Mirrors the "Khaareto Homepage" design-system source.
+   ============================================================ */
+
+:root {
+    --kh-bg: #0d1014;
+    --kh-bg-alt: #0f1318;
+    --kh-bg-footer: #0b0e11;
+    --kh-surface: #12171d;
+    --kh-surface-alt: #141a20;
+    --kh-surface-raised: #161c23;
+    --kh-border: #1e242c;
+    --kh-border-strong: #2a333d;
+    --kh-border-hover: #3a4552;
+    --kh-text: #e8ecf1;
+    --kh-text-soft: #aab4c0;
+    --kh-text-muted: #99a4b1;
+    --kh-text-mute2: #8a95a2;
+    --kh-text-dim: #6d7887;
+    --kh-text-dim2: #7e8896;
+    --kh-text-faint: #56606d;
+    --kh-accent: #f0b323;
+    --kh-accent-hover: #ffd166;
+    --kh-on-accent: #14181d;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--kh-bg);
+    overflow-x: hidden;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Vazirmatn, system-ui, sans-serif;
+    color: var(--kh-text);
+}
+
+::selection {
+    background: var(--kh-accent);
+    color: var(--kh-on-accent);
+}
+
+h1:focus {
+    outline: none;
+}
+
+/* Scroll-anchor offset so the sticky header never covers a section heading. */
+[id] {
+    scroll-margin-top: 108px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .kh-pulse, .kh-scan {
+        animation: none !important;
+    }
+}
+
+/* ---------- Animations from the source design ---------- */
+@keyframes khScan {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes khPulse {
+    0%, 100% {
+        opacity: .35;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.kh-pulse {
+    animation: khPulse 1.8s ease-in-out infinite;
+}
+
+.kh-scan {
+    animation: khScan 4.5s linear infinite;
+}
+
+/* ---------- MudBlazor overrides to match the design ---------- */
+.mud-appbar.kh-appbar {
+    background: rgba(13, 16, 20, .9);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--kh-border);
+    box-shadow: none;
+    height: auto;
+}
+
+.mud-typography {
+    font-family: Vazirmatn, system-ui, sans-serif;
+}
+
+/* Persian digits read better with a slightly looser tracking. */
+.kh-num {
+    letter-spacing: .5px;
+}
+
+.blazor-error-boundary {
+    background: #b32121;
+    padding: 1rem;
+    color: white;
+}
+
+.blazor-error-boundary::after {
+    content: "خطایی رخ داده است.";
+}

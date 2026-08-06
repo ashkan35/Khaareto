@@ -1,0 +1,16 @@
+@inherits LayoutComponentBase
+
+<MudRTLProvider RightToLeft="true">
+    <MudThemeProvider Theme="KhaaretoTheme.Instance" IsDarkMode="true" />
+    <MudPopoverProvider />
+    <MudDialogProvider />
+    <MudSnackbarProvider />
+
+    @Body
+</MudRTLProvider>
+
+<div id="blazor-error-ui" data-nosnippet>
+    خطای پیش‌بینی‌نشده‌ای رخ داده است.
+    <a href="." class="reload">بارگذاری مجدد</a>
+    <span class="dismiss">🗙</span>
+</div>

@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Khaareto/Khaareto.Client/Khaareto.Client.csproj" />
+  <Project Path="Khaareto/Khaareto/Khaareto.csproj" />
+</Solution>

@@ -1,0 +1,31 @@
+@* Renders a product/hero photo, falling back to a styled placeholder when the
+   file is not present yet — the same behaviour as <image-slot> in the design source. *@
+
+<div class="kh-slot @Class">
+    <div class="kh-slot-placeholder">
+        <MudIcon Icon="@Icons.Material.Outlined.Image" Class="kh-slot-placeholder-icon" />
+        <span class="kh-slot-placeholder-text">@Placeholder</span>
+    </div>
+    <img class="kh-slot-img"
+         src="@Src"
+         alt="@Alt"
+         loading="@(Eager ? "eager" : "lazy")"
+         decoding="async"
+         onerror="this.classList.add('kh-slot-img--missing')" />
+</div>
+
+@code {
+    /// <summary>Path to the image, relative to wwwroot.</summary>
+    [Parameter, EditorRequired] public string Src { get; set; } = string.Empty;
+
+    /// <summary>Alt text. Left empty for purely decorative imagery.</summary>
+    [Parameter] public string Alt { get; set; } = string.Empty;
+
+    /// <summary>Caption shown while the image is missing.</summary>
+    [Parameter] public string Placeholder { get; set; } = "تصویر محصول";
+
+    /// <summary>Skip lazy-loading — use for above-the-fold imagery.</summary>
+    [Parameter] public bool Eager { get; set; }
+
+    [Parameter] public string? Class { get; set; }
+}

@@ -1,0 +1,713 @@
+/* ============================================================
+   Khaareto homepage — presentation layer.
+
+   Deliberately NOT a scoped .razor.css: most rules target elements
+   rendered by MudBlazor components, which never receive the caller's
+   CSS-isolation scope attribute.
+   ============================================================ */
+
+/* ─────────────────────────── Announcement strip ────────────────────────── */
+.kh-announce {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: var(--kh-accent);
+    color: var(--kh-on-accent);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: .2px;
+    padding: 10px 20px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+.kh-announce-dot {
+    flex: 0 0 auto;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--kh-on-accent);
+}
+
+.kh-announce-sweep {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .45), transparent);
+    pointer-events: none;
+}
+
+/* ───────────────────────────────  Header  ─────────────────────────────── */
+.kh-appbar.mud-appbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    height: auto;
+    background: rgba(13, 16, 20, .9);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--kh-border);
+    box-shadow: none;
+}
+
+.kh-appbar .mud-toolbar {
+    height: auto;
+    min-height: 0;
+    gap: 24px;
+    padding: 22px 48px;
+}
+
+.kh-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--kh-text) !important;
+    flex: 0 0 auto;
+}
+
+.kh-brand-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    line-height: 1.25;
+}
+
+.kh-brand-name {
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: -.5px;
+}
+
+.kh-brand-domain {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--kh-text-dim);
+    letter-spacing: 2px;
+    direction: ltr;
+}
+
+.kh-nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.kh-nav-link {
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    color: var(--kh-text-soft) !important;
+    transition: color .15s ease;
+}
+
+.kh-nav-link:hover {
+    color: var(--kh-accent) !important;
+}
+
+.kh-header-contact {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 0 0 auto;
+}
+
+.kh-phone {
+    font-size: 13px;
+    color: var(--kh-text-dim);
+    white-space: nowrap;
+}
+
+/* ───────────────────────────────  Buttons  ────────────────────────────── */
+.kh-btn-accent.mud-button-root {
+    background: var(--kh-accent);
+    color: var(--kh-on-accent);
+    font-weight: 700;
+    font-size: 14px;
+    padding: 11px 22px;
+    border-radius: 8px;
+    box-shadow: none;
+    text-transform: none;
+}
+
+.kh-btn-accent.mud-button-root:hover {
+    background: var(--kh-accent-hover);
+    box-shadow: none;
+}
+
+.kh-btn-ghost.mud-button-root {
+    border: 1px solid var(--kh-border-strong);
+    background: var(--kh-surface-alt);
+    color: var(--kh-text);
+    font-weight: 600;
+    border-radius: 10px;
+    text-transform: none;
+    transition: border-color .15s ease;
+}
+
+.kh-btn-ghost.mud-button-root:hover {
+    border-color: var(--kh-accent);
+    background: var(--kh-surface-alt);
+}
+
+.kh-btn-lg.mud-button-root {
+    font-size: 16px;
+    padding: 15px 32px;
+    border-radius: 10px;
+}
+
+/* ─────────────────────────────  Shared layout  ────────────────────────── */
+/* The side gutter lives on the container, not on the section: MudGrid widens
+   itself by one gutter and pulls back with negative margins, so it must sit
+   inside padded box or it overflows the viewport.
+   1336px = the design's 1240px content width + 2 × 48px gutter. */
+.kh-container.mud-container {
+    max-width: 1336px;
+    margin-inline: auto;
+    padding-inline: 48px;
+}
+
+.kh-section {
+    padding: 84px 0;
+}
+
+.kh-section--tight {
+    padding-top: 0;
+}
+
+.kh-grid-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(#ffffff08 1px, transparent 1px), linear-gradient(90deg, #ffffff08 1px, transparent 1px);
+    background-size: 56px 56px;
+    pointer-events: none;
+}
+
+.kh-grid-overlay--masked {
+    -webkit-mask-image: radial-gradient(70% 70% at 50% 40%, #000, transparent);
+    mask-image: radial-gradient(70% 70% at 50% 40%, #000, transparent);
+}
+
+.kh-grid-overlay--fine {
+    background-image: linear-gradient(#ffffff06 1px, transparent 1px), linear-gradient(90deg, #ffffff06 1px, transparent 1px);
+    background-size: 42px 42px;
+}
+
+.kh-accent {
+    color: var(--kh-accent);
+}
+
+.kh-muted.mud-typography {
+    color: var(--kh-text-mute2);
+    margin: 0;
+}
+
+/* ────────────────────────────────  Hero  ──────────────────────────────── */
+.kh-hero {
+    position: relative;
+    padding: 96px 0 88px;
+    border-bottom: 1px solid var(--kh-border);
+    overflow: hidden;
+    background: radial-gradient(900px 420px at 78% 10%, rgba(240, 179, 35, .10), transparent 65%), linear-gradient(var(--kh-bg-alt), var(--kh-bg));
+}
+
+.kh-hero-inner {
+    position: relative;
+}
+
+.kh-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--kh-border-strong);
+    background: var(--kh-surface-alt);
+    color: #9aa5b1;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 999px;
+    margin-bottom: 26px;
+}
+
+.kh-eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--kh-accent);
+}
+
+.kh-hero-title.mud-typography {
+    margin: 0 0 22px;
+    text-wrap: balance;
+}
+
+.kh-hero-lead.mud-typography {
+    margin: 0 0 36px;
+    font-size: 18px;
+    line-height: 2;
+    color: var(--kh-text-muted);
+    max-width: 520px;
+    text-wrap: pretty;
+}
+
+.kh-hero-actions {
+    margin-bottom: 44px;
+}
+
+.kh-stats {
+    display: grid;
+    grid-template-columns: repeat(3, max-content);
+    gap: 44px;
+    border-top: 1px solid var(--kh-border);
+    padding-top: 26px;
+}
+
+.kh-stat-value {
+    font-size: 27px;
+    font-weight: 800;
+    color: var(--kh-accent);
+}
+
+.kh-stat-label {
+    font-size: 13px;
+    color: var(--kh-text-dim);
+    margin-top: 4px;
+}
+
+.kh-hero-media.mud-paper {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border: 1px solid #232b34;
+    border-radius: 20px;
+    background: linear-gradient(150deg, var(--kh-surface-raised), var(--kh-bg-alt));
+    overflow: hidden;
+    box-shadow: 0 40px 90px -40px #000;
+}
+
+.kh-hero-media .kh-slot {
+    position: absolute;
+    inset: 0;
+}
+
+.kh-hero-media-caption {
+    position: absolute;
+    top: 18px;
+    inset-inline-end: 18px;
+    background: rgba(13, 16, 20, .82);
+    border: 1px solid var(--kh-border-strong);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 12px;
+    color: var(--kh-text-soft);
+    pointer-events: none;
+}
+
+/* ──────────────────────────────  Image slot  ──────────────────────────── */
+.kh-slot {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.kh-slot-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #4c5764;
+    text-align: center;
+    padding: 12px;
+}
+
+.kh-slot-placeholder-icon.mud-icon-root {
+    font-size: 32px;
+    opacity: .55;
+}
+
+.kh-slot-placeholder-text {
+    font-size: 12px;
+}
+
+.kh-slot-img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Set by the img onerror handler when the file has not been added yet. */
+.kh-slot-img--missing {
+    display: none;
+}
+
+/* ──────────────────────────────  Section head  ────────────────────────── */
+.kh-section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.kh-kicker {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--kh-accent);
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.kh-section-note.mud-typography {
+    margin: 0;
+    max-width: 420px;
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--kh-text-dim2);
+}
+
+/* ────────────────────────────  Cards / products  ──────────────────────── */
+.kh-card.mud-paper {
+    border: 1px solid var(--kh-border);
+    border-radius: 16px;
+    background: var(--kh-surface);
+    box-shadow: none;
+    background-image: none;
+}
+
+.kh-product-card.mud-paper {
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: border-color .18s ease;
+}
+
+.kh-product-card.mud-paper:hover {
+    border-color: var(--kh-border-hover);
+}
+
+.kh-product-media {
+    position: relative;
+    height: 176px;
+    background: linear-gradient(140deg, #1a2028, var(--kh-surface));
+    border-bottom: 1px solid var(--kh-border);
+}
+
+.kh-product-body.mud-card-content {
+    padding: 18px 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.kh-product-en {
+    font-size: 12px;
+    color: var(--kh-text-dim);
+    direction: ltr;
+    text-align: right;
+    letter-spacing: .4px;
+}
+
+.kh-product-desc.mud-typography {
+    margin: 4px 0 0;
+    font-size: 13.5px;
+    line-height: 1.85;
+    color: var(--kh-text-mute2);
+    flex: 1;
+}
+
+.kh-product-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--kh-border);
+}
+
+.kh-product-std {
+    font-size: 12px;
+    color: var(--kh-text-dim);
+}
+
+.kh-badge-soon {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--kh-accent);
+    background: rgba(240, 179, 35, .10);
+    border: 1px solid rgba(240, 179, 35, .25);
+    padding: 5px 11px;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+/* ───────────────────────────────  Specs  ──────────────────────────────── */
+.kh-spec-card.mud-paper {
+    height: 100%;
+    padding: 30px;
+}
+
+.kh-spec-icon.mud-icon-root {
+    display: block;
+    font-size: 26px;
+    color: var(--kh-accent);
+    margin-bottom: 14px;
+}
+
+.kh-spec-title.mud-typography {
+    margin: 0 0 10px;
+}
+
+/* ────────────────────────────────  CTA  ───────────────────────────────── */
+.kh-cta.mud-paper {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--kh-border-strong);
+    border-radius: 22px;
+    background: linear-gradient(140deg, #171d24, var(--kh-bg-alt));
+    padding: 62px 56px;
+    text-align: center;
+    box-shadow: none;
+}
+
+.kh-cta-inner {
+    position: relative;
+}
+
+.kh-cta-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid rgba(240, 179, 35, .3);
+    background: rgba(240, 179, 35, .08);
+    color: var(--kh-accent);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 18px;
+    border-radius: 999px;
+    margin-bottom: 22px;
+}
+
+.kh-cta-badge-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--kh-accent);
+}
+
+.kh-cta-title.mud-typography {
+    margin: 0 0 14px;
+    font-size: 40px;
+    font-weight: 900;
+    letter-spacing: -.8px;
+}
+
+.kh-cta-lead.mud-typography {
+    margin: 0 auto 32px;
+    max-width: 560px;
+    color: var(--kh-text-muted);
+    text-wrap: pretty;
+}
+
+.kh-cta-form {
+    align-items: flex-start;
+}
+
+.kh-cta-input.mud-input-control {
+    flex: 0 0 auto;
+    width: 260px;
+    margin: 0;
+}
+
+.kh-cta-input .mud-input.mud-input-outlined {
+    background: var(--kh-bg);
+    border-radius: 10px;
+}
+
+.kh-cta-input .mud-input-outlined-border {
+    border-radius: 10px;
+    border-color: var(--kh-border-strong);
+}
+
+.kh-cta-input .mud-input-root {
+    font-size: 15px;
+    color: var(--kh-text);
+}
+
+.kh-cta-input .mud-input.mud-input-outlined input {
+    padding-block: 15px;
+}
+
+/* ───────────────────────────────  Footer  ─────────────────────────────── */
+.kh-footer {
+    border-top: 1px solid var(--kh-border);
+    padding: 40px 0;
+    background: var(--kh-bg-footer);
+}
+
+.kh-footer-inner.mud-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.kh-footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--kh-text-dim);
+}
+
+.kh-footer-meta {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    font-size: 13px;
+    color: var(--kh-text-faint);
+}
+
+/* ────────────────────────────  Responsive  ────────────────────────────── */
+
+/* MudGrid widens itself by one gutter and pulls back with a negative left
+   margin. Once a grid collapses to a single column that gutter buys nothing
+   but can outrun the container padding, so drop it. */
+@media (max-width: 959.98px) {
+    .kh-hero-inner .mud-grid {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .kh-hero-inner .mud-grid > .mud-grid-item {
+        padding-left: 0;
+    }
+}
+
+@media (max-width: 599.98px) {
+    .kh-container .mud-grid {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .kh-container .mud-grid > .mud-grid-item {
+        padding-left: 0;
+    }
+}
+@media (max-width: 1100px) {
+    .kh-container.mud-container {
+        padding-inline: 24px;
+    }
+
+    .kh-appbar .mud-toolbar {
+        padding: 18px 24px;
+    }
+
+    .kh-nav {
+        gap: 20px;
+    }
+
+    .kh-hero {
+        padding: 72px 0 64px;
+    }
+
+    .kh-section {
+        padding: 64px 0;
+    }
+
+    .kh-section--tight {
+        padding-top: 0;
+    }
+
+    .kh-footer {
+        padding: 32px 0;
+    }
+}
+
+@media (max-width: 900px) {
+    .kh-nav {
+        display: none;
+    }
+
+    .kh-hero-title.mud-typography {
+        font-size: 42px;
+        letter-spacing: -.6px;
+    }
+
+    .kh-hero-lead.mud-typography {
+        max-width: none;
+    }
+
+    .kh-cta.mud-paper {
+        padding: 44px 24px;
+    }
+
+    .kh-cta-title.mud-typography {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 600px) {
+    .kh-container.mud-container {
+        padding-inline: 16px;
+    }
+
+    .kh-announce {
+        font-size: 12.5px;
+        padding: 9px 14px;
+    }
+
+    .kh-appbar .mud-toolbar {
+        padding: 14px 16px;
+        gap: 12px;
+    }
+
+    .kh-phone {
+        display: none;
+    }
+
+    .kh-hero {
+        padding: 48px 0 52px;
+    }
+
+    .kh-section {
+        padding: 52px 0;
+    }
+
+    .kh-section--tight {
+        padding-top: 0;
+    }
+
+    .kh-hero-title.mud-typography {
+        font-size: 33px;
+    }
+
+    .kh-stats {
+        grid-template-columns: repeat(2, max-content);
+        gap: 20px 32px;
+    }
+
+    .kh-cta-input.mud-input-control {
+        width: 100%;
+    }
+
+    .kh-cta-form {
+        width: 100%;
+    }
+
+    .kh-footer {
+        padding: 28px 16px;
+    }
+
+    .kh-footer-meta {
+        gap: 16px;
+    }
+}
